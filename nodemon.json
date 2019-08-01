@@ -2,5 +2,5 @@
   "watch": ["app/server"],
   "ext": "ts",
   "ignore": ["app/server/**/*.spec.ts"],
-  "exec": "ts-node -p app/server"
+  "exec": "ts-node -P app/server/tsconfig.json app/server"
 }
