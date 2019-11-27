@@ -2,14 +2,18 @@
   "name": "eztv2",
   "version": "1.0.0",
   "scripts": {
-    "client": "parcel watch app/client/index.html -d app/client/dist",
+    "client": "parcel watch app/client/index.html -d app/client/dist --public-url ./",
     "server": "nodemon",
     "start": "run-p client server"
   },
-  "keywords": [],
-  "author": "",
   "license": "CC-BY-4.0",
   "dependencies": {
+    "@types/morgan": "^1.7.37",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "node": "^12.13.0",
+    "node-fetch": "^2.6.0",
     "nodemon": "^1.19.1",
     "npm-run-all": "^4.1.5",
     "parcel": "^1.12.3",
@@ -17,11 +21,12 @@
     "react-dom": "^16.8.6",
     "sass": "^1.22.7",
     "ts-node": "^8.3.0",
-    "typescript": "^3.5.3",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
     "@types/express": "^4.17.0",
     "@types/node-fetch": "^2.5.0",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.0"
+    "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4"
   }
 }
