@@ -27,7 +27,7 @@ export function buildOmdbQueryString({
         throw new Error("OMDB API key missing")
     }
 
-    page > 100 ? 100 : page
+    page = page > 100 ? 100 : page
 
     const qs = buildQueryString({
         s: query,

@@ -14,7 +14,7 @@ export function buildEztvQueryString({
     limit = 50,
     page = 1
 }: EztvProps): string {
-    limit > 100 ? 100 : limit
+    limit = limit > 100 ? 100 : limit
 
     const qs = buildQueryString({
         imdb_id,
