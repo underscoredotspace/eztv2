@@ -51,9 +51,9 @@ describe("Build HTTP request for OMDB", () => {
 
     describe("do request", () => {
         test("should ", () => {
-            mockBuildQS.mockReturnValue("france")
+            mockBuildQS.mockReturnValue("?france")
             buildOmdbRequest({ query: "banana" })
-            expect(fetch).toHaveBeenCalledWith("http://www.omdbapi.com/france")
+            expect(fetch).toHaveBeenCalledWith("http://www.omdbapi.com?france")
         })
     })
 })
