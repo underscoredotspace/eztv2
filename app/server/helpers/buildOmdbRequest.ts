@@ -16,29 +16,34 @@ export interface OmdbProps {
     page?: number
 }
 
-export function buildOmdbQueryString({
+export const buildOmdbQueryString = ({
     query,
     type = OmdbType.SERIES,
     year,
     page = 1
-}: OmdbProps): string {
-    const apiKey = process.env["OMDB_API_KEY"]
-    if (!apiKey) {
-        throw new Error("OMDB API key missing")
-    }
+}: OmdbProps): Promise<string> =>
+    new Promise((resolve, reject) => {
+        if (query.length < 3) {
+            reject(new Error('"query" must be at least 3 characters long'))
+        }
 
-    page = page > 100 ? 100 : page
+        const apiKey = process.env["OMDB_API_KEY"]
+        if (!apiKey) {
+            reject(new Error("OMDB API key missing"))
+        }
 
-    const qs = buildQueryString({
-        s: query,
-        page: Number(page),
-        type,
-        y: Number(year),
-        apiKey
+        page = page > 100 ? 100 : page
+
+        const qs = buildQueryString({
+            s: query,
+            page: Number(page),
+            type,
+            y: Number(year),
+            apiKey
+        })
+
+        resolve(qs)
     })
 
-    return qs
-}
-
-export default (props: OmdbProps): Promise<Response> =>
-    fetch(OMDB_API(buildOmdbQueryString(props)))
+export default async (props: OmdbProps): Promise<Response> =>
+    fetch(OMDB_API(await buildOmdbQueryString(props)))

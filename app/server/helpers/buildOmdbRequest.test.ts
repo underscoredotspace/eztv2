@@ -16,8 +16,10 @@ describe("Build HTTP request for OMDB", () => {
         delete process.env["OMDB_API_KEY"]
     })
     describe("build query string for request", () => {
-        test("should return valid request", () => {
-            const omdbQueryString = buildOmdbQueryString({ query: "banana" })
+        test("should return valid request", async () => {
+            const omdbQueryString = await buildOmdbQueryString({
+                query: "banana"
+            })
             const query = {
                 apiKey,
                 page: 1,
@@ -29,15 +31,25 @@ describe("Build HTTP request for OMDB", () => {
             expect(omdbQueryString).toEqual(query)
         })
 
-        test("should through error cos no apiKey", () => {
-            delete process.env["OMDB_API_KEY"]
-            expect(() =>
-                buildOmdbQueryString({ query: "banana" })
-            ).toThrowError("OMDB API key missing")
+        test("should return error cos query less than 3 characters", () => {
+            expect(buildOmdbQueryString({ query: "oh" })).rejects.toMatchObject(
+                {
+                    message: '"query" must be at least 3 characters long'
+                }
+            )
         })
 
-        test("should request page no greater than 100", () => {
-            const omdbQueryString = buildOmdbQueryString({
+        test("should return error cos no apiKey", () => {
+            delete process.env["OMDB_API_KEY"]
+            expect(
+                buildOmdbQueryString({ query: "banana" })
+            ).rejects.toMatchObject({
+                message: "OMDB API key missing"
+            })
+        })
+
+        test("should request page no greater than 100", async () => {
+            const omdbQueryString = await buildOmdbQueryString({
                 query: "banana",
                 page: 101
             })
@@ -50,9 +62,9 @@ describe("Build HTTP request for OMDB", () => {
     })
 
     describe("do request", () => {
-        test("should ", () => {
+        test("should ", async () => {
             mockBuildQS.mockReturnValue("france")
-            buildOmdbRequest({ query: "banana" })
+            await buildOmdbRequest({ query: "banana" })
             expect(fetch).toHaveBeenCalledWith("http://www.omdbapi.com?france")
         })
     })
