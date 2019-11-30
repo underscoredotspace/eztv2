@@ -20,7 +20,7 @@ describe("Build HTTP request for OMDB", () => {
 
     describe("do request", () => {
         test("should make request", () => {
-            mockBuildQS.mockReturnValue("?france")
+            mockBuildQS.mockReturnValue("france")
             buildEztvRequest({})
             expect(fetch).toHaveBeenCalledWith(
                 "https://eztv.io/api/get-torrents?france"

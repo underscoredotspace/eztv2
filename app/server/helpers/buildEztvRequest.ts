@@ -1,7 +1,7 @@
 import fetch, { Response } from "node-fetch"
 import { buildQueryString } from "./buildQueryString"
 
-const EZTV_API = (qs: string) => `https://eztv.io/api/get-torrents${qs}`
+const EZTV_API = (qs: string) => `https://eztv.io/api/get-torrents?${qs}`
 
 export interface EztvProps {
     imdb_id?: string
