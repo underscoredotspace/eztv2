@@ -1,4 +1,4 @@
-import buildOmdbRequest, { buildOmdbQueryString } from "./buildOmdbRequest"
+import omdbRequest, { buildOmdbQueryString } from "./omdbRequest"
 jest.mock("./buildQueryString")
 import { buildQueryString } from "./buildQueryString"
 jest.mock("node-fetch")
@@ -64,7 +64,7 @@ describe("Build HTTP request for OMDB", () => {
     describe("do request", () => {
         test("should ", async () => {
             mockBuildQS.mockReturnValue("france")
-            await buildOmdbRequest({ query: "banana" })
+            await omdbRequest({ query: "banana" })
             expect(fetch).toHaveBeenCalledWith("http://www.omdbapi.com?france")
         })
     })

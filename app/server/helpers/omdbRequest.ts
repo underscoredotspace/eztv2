@@ -23,7 +23,7 @@ export const buildOmdbQueryString = ({
     page = 1
 }: OmdbProps): Promise<string> =>
     new Promise((resolve, reject) => {
-        if (query.length < 3) {
+        if (!query || query.length < 3) {
             reject(new Error('"query" must be at least 3 characters long'))
         }
 

@@ -1,5 +1,5 @@
-import { Router, response } from "express"
-import buildOmdbRequest from "../helpers/buildOmdbRequest"
+import { Router } from "express"
+import buildOmdbRequest from "../helpers/omdbRequest"
 const api = Router()
 
 api.get("/omdb-search", async ({ query }, res) => {
