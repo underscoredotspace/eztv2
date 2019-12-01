@@ -2,6 +2,7 @@ import fetch, { Response } from "node-fetch"
 import { buildQueryString } from "./buildQueryString"
 
 export const OMDB_API = (qs: string) => `http://www.omdbapi.com?${qs}`
+// http://img.omdbapi.com/?i=tt1561755
 
 export enum OmdbType {
     FILM = "movie",
